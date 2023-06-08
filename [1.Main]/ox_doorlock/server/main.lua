@@ -40,6 +40,7 @@ local function encodeData(door)
 		items = door.items,
 		lockpick = door.lockpick,
 		hideUi = door.hideUi,
+		holdOpen = door.holdOpen,
 		lockSound = door.lockSound,
 		maxDistance = door.maxDistance,
 		doorRate = door.doorRate,
@@ -212,8 +213,8 @@ local function isAuthorised(playerId, door, lockpick)
 			return DoesPlayerHaveItem(player, lockpickItems)
 		end
 
-		if door.characters then
-			return table.contains(door.characters, GetCharacterId(player))
+		if door.characters and table.contains(door.characters, GetCharacterId(player)) then
+			return true
 		end
 
 		if door.groups then
@@ -275,14 +276,10 @@ end)
 RegisterNetEvent('ox_doorlock:setState', function(id, state, lockpick)
 	local door = doors[id]
 
-	if source == '' then
-		source = nil
-	end
-
 	state = (state == 1 or state == 0) and state or (state and 1 or 0)
 
 	if door then
-		local authorised = source == nil or isAuthorised(source, door, lockpick)
+		local authorised = source == '' or isAuthorised(source, door, lockpick)
 
 		if authorised then
 			door.state = state
