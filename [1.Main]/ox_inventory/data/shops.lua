@@ -1,15 +1,3 @@
----wip types
-
----@class OxShop
----@field name string
----@field label? string
----@field blip? { id: number, colour: number, scale: number }
----@field inventory { name: string, price: number, count?: number, currency?: string }
----@field locations? vector3[]
----@field targets? { loc: vector3, length: number, width: number, heading: number, minZ: number, maxZ: number, distance: number, debug?: boolean, drawSprite?: boolean }[]
----@field groups? string | string[] | table<string, number> }
----@field model? number[]
-
 return {
 	General = {
 		name = 'Shop',
@@ -30,13 +18,6 @@ return {
 			vec3(2679.25, 3280.12, 55.24),
 			vec3(2557.94, 382.05, 108.62),
 			vec3(373.55, 325.56, 103.56),
-			vec3(1135.808, -982.281, 46.415),
-			vec3(-1222.915, -906.983, 12.326),
-			vec3(-1487.553, -379.107, 40.163),
-			vec3(-2968.243, 390.910, 15.043),
-			vec3(1166.024, 2708.930, 38.157),
-			vec3(1392.562, 3604.684, 34.980),
-			vec3(-1393.409, -606.624, 30.319)
 		}, targets = {
 			{ loc = vec3(25.06, -1347.32, 29.5), length = 0.7, width = 0.5, heading = 0.0, minZ = 29.5, maxZ = 29.9, distance = 1.5 },
 			{ loc = vec3(-3039.18, 585.13, 7.91), length = 0.6, width = 0.5, heading = 15.0, minZ = 7.91, maxZ = 8.31, distance = 1.5 },
@@ -48,6 +29,26 @@ return {
 			{ loc = vec3(2678.29, 3279.94, 55.24), length = 0.6, width = 0.5, heading = 330.0, minZ = 55.24, maxZ = 55.64, distance = 1.5 },
 			{ loc = vec3(2557.19, 381.4, 108.62), length = 0.6, width = 0.5, heading = 0.0, minZ = 108.62, maxZ = 109.02, distance = 1.5 },
 			{ loc = vec3(373.13, 326.29, 103.57), length = 0.6, width = 0.5, heading = 345.0, minZ = 103.57, maxZ = 103.97, distance = 1.5 },
+		}
+	},
+
+	Liquor = {
+		name = 'Liquor Store',
+		blip = {
+			id = 93, colour = 69, scale = 0.8
+		}, inventory = {
+			{ name = 'water', price = 10 },
+			{ name = 'cola', price = 10 },
+			{ name = 'burger', price = 15 },
+		}, locations = {
+			vec3(1135.808, -982.281, 46.415),
+			vec3(-1222.915, -906.983, 12.326),
+			vec3(-1487.553, -379.107, 40.163),
+			vec3(-2968.243, 390.910, 15.043),
+			vec3(1166.024, 2708.930, 38.157),
+			vec3(1392.562, 3604.684, 34.980),
+			vec3(-1393.409, -606.624, 30.319)
+		}, targets = {
 			{ loc = vec3(1134.9, -982.34, 46.41), length = 0.5, width = 0.5, heading = 96.0, minZ = 46.4, maxZ = 46.8, distance = 1.5 },
 			{ loc = vec3(-1222.33, -907.82, 12.43), length = 0.6, width = 0.5, heading = 32.7, minZ = 12.3, maxZ = 12.7, distance = 1.5 },
 			{ loc = vec3(-1486.67, -378.46, 40.26), length = 0.6, width = 0.5, heading = 133.77, minZ = 40.1, maxZ = 40.5, distance = 1.5 },

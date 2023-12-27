@@ -11,8 +11,11 @@
 ---@field style? { [string]: any }
 ---@field icon? string | {[1]: IconProp, [2]: string};
 ---@field iconColor? string;
+---@field alignIcon? 'top' | 'center';
 
+---`client`
 ---@param data NotifyProps
+---@diagnostic disable-next-line: duplicate-set-field
 function lib.notify(data)
     SendNUIMessage({
         action = 'notify',
@@ -30,10 +33,10 @@ end
 
 ---@param data DefaultNotifyProps
 function lib.defaultNotify(data)
-    -- Backwards compat for v3 
+    -- Backwards compat for v3
     data.type = data.status
     if data.type == 'inform' then data.type = 'info' end
-    return lib.notify(data)
+    return lib.notify(data --[[@as NotifyProps]])
 end
 
 RegisterNetEvent('ox_lib:notify', lib.notify)

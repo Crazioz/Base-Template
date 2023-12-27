@@ -43,7 +43,7 @@ local function createCraftingBench(id, data)
 	end
 end
 
-for id, data in pairs(data('crafting')) do createCraftingBench(id, data) end
+for id, data in pairs(lib.load('data.crafting')) do createCraftingBench(id, data) end
 
 ---falls back to player coords if zones and points are both nil
 ---@param source number
@@ -112,7 +112,8 @@ lib.callback.register('ox_inventory:craftItem', function(source, id, index, reci
 			end
 
 			local craftedItem = Items(recipe.name)
-			local newWeight = left.weight + (craftedItem.weight + (recipe.metadata?.weight or 0)) * (recipe.count or 1)
+			local craftCount = (type(recipe.count) == 'number' and recipe.count) or (table.type(recipe.count) == 'array' and math.random(recipe.count[1], recipe.count[2])) or 1
+			local newWeight = left.weight + (craftedItem.weight + (recipe.metadata?.weight or 0)) * craftCount
 			---@todo new iterator or something to accept a map
 			local items = Inventory.Search(left, 'slots', tbl) or {}
 			table.wipe(tbl)
@@ -205,27 +206,14 @@ lib.callback.register('ox_inventory:craftItem', function(source, id, index, reci
 								local newItem = Inventory.SetSlot(left, item, 1, table.deepclone(invSlot.metadata), emptySlot)
 
 								if newItem then
-									newItem.metadata.durability = durability < 0 and 0 or durability
-									durability = 0
-
-									left:syncSlotsWithPlayer({
-										{
-											item = newItem,
-										}
-									}, left.weight)
+                                    Items.UpdateDurability(left, newItem, item, durability < 0 and 0 or durability)
 								end
 							end
 
 							invSlot.count -= 1
 						else
-							invSlot.metadata.durability = durability < 0 and 0 or durability
+                            Items.UpdateDurability(left, invSlot, item, durability < 0 and 0 or durability)
 						end
-
-						left:syncSlotsWithPlayer({
-							{
-								item = invSlot,
-							}
-						}, left.weight)
 					else
 						local removed = invSlot and Inventory.RemoveItem(left, invSlot.name, count, nil, slot)
 						-- Failed to remove item (inventory state unexpectedly changed?)
@@ -233,7 +221,7 @@ lib.callback.register('ox_inventory:craftItem', function(source, id, index, reci
 					end
 				end
 
-				Inventory.AddItem(left, craftedItem, recipe.count or 1, recipe.metadata or {}, craftedItem.stack and toSlot or nil)
+				Inventory.AddItem(left, craftedItem, craftCount, recipe.metadata or {}, craftedItem.stack and toSlot or nil)
 			end
 
 			return success

@@ -1,5 +1,11 @@
 return {
 	Weapons = {
+		['WEAPON_TECPISTOL'] = {
+			label = 'Tactical SMG',
+			weight = 1500,
+			durability = 0.075,
+			ammoname = 'ammo-9',
+		},
 		['WEAPON_ADVANCEDRIFLE'] = {
 			label = 'Advanced Rifle',
 			weight = 3100,
@@ -791,6 +797,7 @@ return {
 					`COMPONENT_SNSPISTOL_CLIP_02`,
 					`COMPONENT_SNSPISTOL_MK2_CLIP_02`,
 					`COMPONENT_VINTAGEPISTOL_CLIP_02`,
+                    `COMPONENT_TECPISTOL_CLIP_02`,
 				},
 				usetime = 2500
 			}
@@ -1316,6 +1323,126 @@ return {
 			client = {
 				component = {
 					`COMPONENT_KNUCKLE_VARMOD_VAGOS`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_blagueurs'] = {
+			label = 'Blagueurs Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_splatter'] = {
+			label = 'Splatter Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_01`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_bulletholes'] = {
+			label = 'Bullet Holes Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_02`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_burgershot'] = {
+			label = 'Burger Shot Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_03`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_cluckinbell'] = {
+			label = 'Cluckin Bell Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_04`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_fatalincursion'] = {
+			label = 'Fatal Incursion Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_05`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_luchalibre'] = {
+			label = 'Lucha Libre Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_06`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_trippy'] = {
+			label = 'Trippy Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_07`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_tiedye'] = {
+			label = 'Tie-Dye Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_08`
+				},
+				usetime = 2500
+			}
+		},
+
+		['at_skin_wall'] = {
+			label = 'Wall Weapon Kit',
+			type = 'skin',
+			weight = 50,
+			client = {
+				component = {
+					`COMPONENT_BAT_VARMOD_XM3_09`
 				},
 				usetime = 2500
 			}

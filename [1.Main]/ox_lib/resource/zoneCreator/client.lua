@@ -29,6 +29,7 @@ local function updateText()
 		text[#text + 1] = ('Cycle display mode [G]: %s  \n'):format(firstToUpper(displayModes[displayMode]))
         text[#text + 1] = ('Toggle Axis mode [C]: %s  \n'):format(alignMovementWithCamera and 'Camera' or 'Grid')
 		text[#text + 1] = 'Create new point - [Space]  \n'
+        text[#text + 1] = 'Edit last point - [Backspace]  \n'
 	elseif zoneType == 'box' then
 		text[#text + 1] = ('Heading [Q/E]: %s&deg;  \n'):format(heading)
 		text[#text + 1] = ('Height [Shift + Scroll]: %s  \n'):format(height)
@@ -60,7 +61,7 @@ local function closeCreator(cancel)
 			points[#points + 1] = vec(xCoord, yCoord)
 		end
 
-        ---@type string[]
+        ---@type string[]?
 		local input = lib.inputDialog(('Name your %s Zone'):format(firstToUpper(zoneType)), {
             { type = 'input', label = 'Name', placeholder = 'none' },
             { type = 'select', label = 'Format', default = format, options = {
@@ -68,7 +69,9 @@ local function closeCreator(cancel)
                 { value = 'array', label = 'Array' },
                 { value = 'target', label = 'Target'},
             }}
-        }) or {}
+        })
+
+        if not input then return end
 
         format = input[2]
 
@@ -200,8 +203,8 @@ local function startCreator(arg, useLast)
                 local rightX, rightY = getRelativePos(vec2(xCoord, yCoord), vec2(xCoord + 2, yCoord), GetGameplayCamRot(2).z)
                 local forwardX, forwardY = getRelativePos(vec2(xCoord, yCoord), vec2(xCoord, yCoord + 2), GetGameplayCamRot(2).z)
 
-                DrawLine(xCoord, yCoord, zCoord, rightX, rightY, zCoord, 0, 255, 0, 225)
-                DrawLine(xCoord, yCoord, zCoord, forwardX, forwardY, zCoord, 0, 255, 0, 225)
+                DrawLine(xCoord, yCoord, zCoord, rightX, rightY or 0, zCoord, 0, 255, 0, 225)
+                DrawLine(xCoord, yCoord, zCoord, forwardX, forwardY or 0, zCoord, 0, 255, 0, 225)
             end
 
             DrawLine(xCoord, yCoord, zCoord, xCoord + 2, yCoord, zCoord, 0, 0, 255, 225)
@@ -226,6 +229,7 @@ local function startCreator(arg, useLast)
 
             drawLines()
         elseif zoneType == 'sphere' then
+            ---@diagnostic disable-next-line: param-type-mismatch
             DrawMarker(28, xCoord, yCoord, zCoord, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, height, height, height, 255, 42, 24, 100, false, false, 0, false, false, false, false)
         end
 
@@ -292,7 +296,7 @@ local function startCreator(arg, useLast)
                         newX = 0.0
                     end
 
-                    if math.abs(newY) < minCheck then
+                    if math.abs(newY or 0) < minCheck then
                         newY = 0.0
                     end
 
@@ -317,7 +321,7 @@ local function startCreator(arg, useLast)
                         newX = 0.0
                     end
 
-                    if math.abs(newY) < minCheck then
+                    if math.abs(newY or 0) < minCheck then
                         newY = 0.0
                     end
 
@@ -342,7 +346,7 @@ local function startCreator(arg, useLast)
                         newX = 0.0
                     end
 
-                    if math.abs(newY) < minCheck then
+                    if math.abs(newY or 0) < minCheck then
                         newY = 0.0
                     end
 
@@ -367,7 +371,7 @@ local function startCreator(arg, useLast)
                         newX = 0.0
                     end
 
-                    if math.abs(newY) < minCheck then
+                    if math.abs(newY or 0) < minCheck then
                         newY = 0.0
                     end
 
@@ -437,6 +441,15 @@ local function startCreator(arg, useLast)
                 yCoord = round(coords.y)
             elseif IsDisabledControlJustReleased(0, 201) then -- enter
                 closeCreator()
+            elseif IsDisabledControlJustReleased(0, 194) then -- backspace
+                change = true
+
+                if zoneType == 'poly' and #points > 0 then
+                    xCoord = points[#points].x
+                    yCoord = points[#points].y
+
+                    points[#points] = nil
+                end
             elseif IsDisabledControlJustReleased(0, 200) then -- esc
                 SetPauseMenuActive(false)
                 closeCreator(true)

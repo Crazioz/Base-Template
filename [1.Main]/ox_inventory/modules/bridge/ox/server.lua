@@ -1,7 +1,8 @@
-local playerDropped = ...
+CreateThread(function() lib.load('@ox_core.imports.server') end)
+
 local Inventory = require 'modules.inventory.server'
 
-AddEventHandler('ox:playerLogout', playerDropped)
+AddEventHandler('ox:playerLogout', server.playerDropped)
 
 AddEventHandler('ox:setGroup', function(source, name, grade)
 	local inventory = Inventory(source)
@@ -36,4 +37,10 @@ function server.isPlayerBoss(playerId, group, grade)
 	local groupData = GlobalState[('group.%s'):format(group)]
 
 	return groupData and grade >= groupData.adminGrade
+end
+
+---@param entityId number
+---@return number | string
+function server.getOwnedVehicleId(entityId)
+    return Ox.GetVehicle(entityId)?.id
 end

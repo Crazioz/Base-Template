@@ -215,46 +215,4 @@ return {
 		label = 'Scrap Metal',
 		weight = 80,
 	},
-
-	["acier"] = {
-		label = "Acier",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
-
-	["carbon"] = {
-		label = "Carbone",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
-
-	["douille"] = {
-		label = "Boite de douille",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
-
-	["poudre"] = {
-		label = "Boite de poudre",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
-
-	["spray"] = {
-		label = "Spray",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
-
-	["spray_remover"] = {
-		label = "Spray Remover",
-		weight = 1,
-		stack = true,
-		close = true,
-	},
 }
