@@ -1,4 +1,4 @@
-Voici ma toute base Template sous l'inventaire OX_inventory pour Fivem sous le framework ESX Legacy Version 1.9.4
+Voici ma toute base Template sous l'inventaire OX_inventory pour Fivem sous le framework ESX Legacy Version 1.10.5
 
 Rejoindre notre discord : https://discord.gg/cSAv6BUhX8 en cas de problème merci de contacter : !CraziozFR#9843 
 voici la documentation de la Base : https://basev1-by-craziozfr.gitbook.io/basev1-by-craziozfr/
