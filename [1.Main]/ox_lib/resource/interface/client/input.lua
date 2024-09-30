@@ -18,8 +18,10 @@ local input
 ---@field required? boolean
 ---@field format? string
 ---@field returnString? boolean
----@field clearable? string
+---@field clearable? boolean
+---@field searchable? boolean
 ---@field description? string
+---@field maxSelectedValues? number
 
 ---@class InputDialogOptionsProps
 ---@field allowCancel? boolean
